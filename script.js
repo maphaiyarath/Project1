@@ -7,23 +7,23 @@ $(document).ready(function() {
     });
 
     // save city and state search inputs
+    var callsign = '';
     var city = '';
     var state = '';
+    var stations = [];
 
     $("#search-button").on("click", function(event) {
         event.preventDefault();
 
         // make sure the input is valid
-        console.log($("#city-input").val().trim());
-        city = $("#city-input").val().trim();
+        console.log($("#city-input").val());
+        city = $("#city-input").val();
         // state = ;
 
         // if the input is valid, go to the results page and display the list of radio stations
-        // html/home.html
-        // --> submit
-        // html/results.html
+        // window.location.href = './results.html';
         getStations();
-        window.location.href = './results.html';
+        
 
         // otherwise, tell the user to search again
     });
@@ -43,17 +43,16 @@ $(document).ready(function() {
             url: darURL,
             method: "GET"
         }).then(function(response) {
-            // console.log(darURL);
-            console.log(response.result[0].stations);
-            var results = response.result[0].stations;
-            /*
-            for (var i = 0; i < results.length; i++) {
+            stations = response.result[0].stations;
+            console.log(darURL);
+            for (var i = 0; i < stations.length; i++) {
                 var stationEl = $("<li>");
                 stationEl.attr("class", "station");
-                stationEl.html(results[i].callsign + ' - ' + results[i].description);
-                radioListEl.append(stationEl);
+                stationEl.attr("style", "color: red;");
+                stationEl.html(stations[i].callsign + ' - ' + stations[i].description);
+                $("#search-list").append(stationEl);
             }
-            */
+            
         });
     }
 
@@ -64,16 +63,17 @@ $(document).ready(function() {
 
 
 /*
+// get user's location based off of ip address
 var queryURL = "http://ip-api.com/json/";
 
-    $.ajax({
-        url: queryURL,
-        method: "GET"
-    }).then(function(response) {
-        city = response.city;
-        state = response.region;
-        console.log(city, state);
+$.ajax({
+    url: queryURL,
+    method: "GET"
+}).then(function(response) {
+    city = response.city;
+    state = response.region;
+    console.log(city, state);
 
-        getStations();
-    });
+    getStations();
+});
 */
