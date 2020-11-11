@@ -6,60 +6,85 @@ $(document).ready(function() {
         }
     });
 
-    // save city and state search inputs
+    // global variables
     var callsign = '';
     var city = '';
     var state = '';
     var stations = [];
+    var genres = [];
 
+    // search button event handler
     $("#search-button").on("click", function(event) {
         event.preventDefault();
 
-        // make sure the input is valid
-        console.log($("#city-input").val());
-        city = $("#city-input").val();
+        // TODO: make sure the input is valid
+        // city = $("#city-input").val();
         // state = ;
 
         // if the input is valid, go to the results page and display the list of radio stations
         // window.location.href = './results.html';
         getStations();
         
-
-        // otherwise, tell the user to search again
+        // TODO: otherwise, tell the user to search again
     });
     
     // return a list of radio stations using dar fm api
     function getStations() {
         // dar fm
         var apiKey = '4363387309';
-        city = 'Dallas';
-        state = 'TX';
+
+        // for now, we are hard coding city & state
+        city = 'san francisco';
+        state = 'ca';
         
-        // manually setting city / state for now
         var darURL = 'http://api.dar.fm/darstations.php?callback=json&city=' + city + '&state=' + state + '&exact=1&partner_token=' + apiKey;
-        // var reformattedURL = encodeURI(darURL);
+        var darURLEncoded = encodeURI(darURL);
 
         $.ajax({
-            url: darURL,
+            url: darURLEncoded,
             method: "GET"
         }).then(function(response) {
             stations = response.result[0].stations;
-            console.log(darURL);
+            // console.log(darURL1);
+
             for (var i = 0; i < stations.length; i++) {
+                // add to list of genres
+                if (!genres.includes(stations[i].genre)) {
+                    genres.push(stations[i].genre);
+                }
+
+                // create a new list item for every station
                 var stationEl = $("<li>");
                 stationEl.attr("class", "station");
                 stationEl.attr("style", "color: red;");
-                stationEl.html(stations[i].callsign + ' - ' + stations[i].description);
+                stationEl.html(stations[i].callsign + ' - ' + stations[i].slogan);
                 $("#search-list").append(stationEl);
             }
-            
-        });
-    }
 
-    
+            // printing out genres
+            console.log(genres.length);
+            console.log(genres);
+        });
+    }    
 });
 
-
+/*
+<div class="row">
+      <div class="col-4">
+        <div class="card">
+          <div class="card-content white-text">
+            <span class="card-title">Sports</span>
+            <p>I am a very simple card. I am good at containing small bits of information.
+            I am convenient because I require little markup to use effectively.</p>
+          </div>
+          <div id="sports" class="card-action">
+            <a href="#">Link</a>
+            <a href="#">Link</a>
+          </div>
+        </div>
+      </div>
+    </div>
+*/
 
 
 /*
@@ -72,7 +97,6 @@ $.ajax({
 }).then(function(response) {
     city = response.city;
     state = response.region;
-    console.log(city, state);
 
     getStations();
 });
