@@ -17,7 +17,7 @@ $(document).ready(function() {
         method: "GET"
     }).then(function(response) {
         city = response.city;
-        state = response.region;
+        state = recdgitsponse.region;
         console.log(city, state);
 
         getStations();
@@ -49,4 +49,36 @@ $(document).ready(function() {
             }
         });
     }
+<<<<<<< HEAD
 });
+=======
+};
+
+$.ajax(settings).done(function (response) {
+    // console.log(response);
+});
+
+// npr
+var nprCode = '';
+var nprSettings = {
+    "async": true,
+    "crossDomain": true,
+    "url": "https://api.npr.org/authorization/v2/device",
+    "method": "POST",
+    "headers": {
+        "content-type": "application/x-www-form-urlencoded"
+    },
+    "data": {
+        "client_id": "nprone_trial_hOUuSGVMR4IF",
+        "client_secret": "4vkUM7sG4irc8NSxMLMK7IaXmTYEhIHBRaBM6S00",
+        "scope": "localactivation"
+    }
+}
+
+$.ajax(nprSettings).done(function (response) {
+    // console.log(response);
+    nprCode = response.device_code;
+    console.log(nprCode);
+});
+*/
+>>>>>>> 824480df83e226987586950127dd3f5f68569d65
