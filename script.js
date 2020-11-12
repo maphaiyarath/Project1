@@ -102,23 +102,7 @@ $(document).ready(function() {
 });
 
 
-/*
-<div class="row">
-      <div class="col-4">
-        <div class="card">
-          <div class="card-content white-text">
-            <span class="card-title">Sports</span>
-            <p>I am a very simple card. I am good at containing small bits of information.
-            I am convenient because I require little markup to use effectively.</p>
-          </div>
-          <div id="sports" class="card-action">
-            <a href="#">Link</a>
-            <a href="#">Link</a>
-          </div>
-        </div>
-      </div>
-    </div>
-*/
+
 
 
 /*
