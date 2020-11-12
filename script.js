@@ -18,12 +18,12 @@ $(document).ready(function() {
         event.preventDefault();
 
         // TODO: make sure the input is valid
-        // city = $("#city-input").val();
+        city = $("#city-input").val();
         // state = ;
 
         // if the input is valid, go to the results page and display the list of radio stations
-        // window.location.href = './results.html';
         getStations();
+        // window.location.href = './results.html';
         
         // TODO: otherwise, tell the user to search again
     });
@@ -34,7 +34,7 @@ $(document).ready(function() {
         var apiKey = '4363387309';
 
         // for now, we are hard coding city & state
-        city = 'san francisco';
+        city = 'san diego';
         state = 'ca';
         
         var darURL = 'http://api.dar.fm/darstations.php?callback=json&city=' + city + '&state=' + state + '&exact=1&partner_token=' + apiKey;
@@ -45,28 +45,62 @@ $(document).ready(function() {
             method: "GET"
         }).then(function(response) {
             stations = response.result[0].stations;
-            // console.log(darURL1);
+            // console.log(darURLEncoded);
+            // console.log(stations.length);
 
             for (var i = 0; i < stations.length; i++) {
+                localStorage.clear();
+
                 // add to list of genres
                 if (!genres.includes(stations[i].genre)) {
                     genres.push(stations[i].genre);
                 }
 
+                // station info
+                var station = {
+                    genre: stations[i].genre,
+                    callsign: stations[i].callsign//,
+                    // dial: stations[i].dial,
+                    // slogan: stations[i].slogan
+                }
+
+                // stations.push(station);
+
                 // create a new list item for every station
-                var stationEl = $("<li>");
-                stationEl.attr("class", "station");
-                stationEl.attr("style", "color: red;");
-                stationEl.html(stations[i].callsign + ' - ' + stations[i].slogan);
-                $("#search-list").append(stationEl);
+                // var stationEl = $("<li>");
+                // stationEl.attr("class", "station");
+                // stationEl.attr("style", "color: red;");
+                // stationEl.html(stations[i].callsign + ' - ' + stations[i].slogan);
+                // $("#search-list").append(stationEl);
             }
 
-            // printing out genres
-            console.log(genres.length);
+            console.log(stations);
             console.log(genres);
+
+            localStorage.setItem('genres', JSON.stringify(genres));
+            // localStorage.setItem('stations', JSON.stringify(stations));
+            
+            // console.log(stations);
         });
-    }    
+    }
+
+    // get list of previously searched stations from local storage, if any
+    function init() {
+        var storedStations = JSON.parse(localStorage.getItem("stations"));
+        var storedGenres = JSON.parse(localStorage.getItem("genres"));
+
+        if (storedStations !== null) {
+            stations = storedStations;
+        }
+
+        if (storedGenres !== null) {
+            genres = storedGenres;
+        }
+    }
+
+    init();
 });
+
 
 /*
 <div class="row">
