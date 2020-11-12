@@ -56,20 +56,18 @@ $(document).ready(function() {
                 // station info
                 var station = {
                     genre: results[i].genre,
-                    callsign: results[i].callsign//,
-                    // dial: stations[i].dial,
-                    // slogan: stations[i].slogan
+                    callsign: results[i].callsign,
+                    dial: results[i].dial,
+                    slogan: results[i].slogan
                 }
 
                 stations.push(station);
             }
 
-            console.log(stations);
-
             localStorage.setItem('genres', JSON.stringify(genres));
             localStorage.setItem('stations', JSON.stringify(stations));
 
-            // window.location.href = './results.html';
+            window.location.href = './results.html';
         });
     }
 

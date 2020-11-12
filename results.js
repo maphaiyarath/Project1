@@ -1,13 +1,21 @@
 $(document).ready(function() {
     var genres = [];
+    var stations = [];
     var container = $(".container");
-
     var storedGenres = JSON.parse(localStorage.getItem("genres"));
+    var storedStations = JSON.parse(localStorage.getItem("stations"));
+    var dataGenre = $(".data-genre");
+
+    // get info from localStorage
+    if (storedStations !== null) {
+        stations = storedStations;
+    }
 
     if (storedGenres !== null) {
         genres = storedGenres;
     }
 
+    // generate a card for each genre
     for (var i = 0; i < genres.length; i++) {
         var row = $("<div>");
         row.addClass("row");
@@ -35,23 +43,19 @@ $(document).ready(function() {
         stationLinksDiv.attr("data-genre", genres[i]);
         card.append(stationLinksDiv);
     }
+
+    // fill in the links for each radio found for a genre
+    for (var i = 0; i < stations.length; i++) {
+        // locate the card to put it in
+        // $(event.target).data('city')
+        // .addClass('demo');
+        var whichGenre = '[data-genre="' + stations[i].genre + '"]';
+        var genreCard = $(whichGenre);
+
+        // add a link to that station
+        var link = $("<a>");
+        link.attr("href", "#");
+        link.html(stations[i].callsign);
+        genreCard.append(link);
+    }
 });
-
-
-
-/*
-<div class="row">
-    <div class="col-4">
-        <div class="card">
-            <div class="card-content white-text">
-                <span class="card-title">Sports</span>
-                <p>I am a very simple card. I am good at containing small bits of information.</p>
-            </div>
-            <div id="sports" class="card-action">
-                <a href="#">Link</a>
-                <a href="#">Link</a>
-            </div>
-        </div>
-    </div>
-</div>
-*/
