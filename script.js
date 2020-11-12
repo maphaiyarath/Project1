@@ -23,7 +23,6 @@ $(document).ready(function() {
 
         // if the input is valid, go to the results page and display the list of radio stations
         getStations();
-        // window.location.href = './results.html';
         
         // TODO: otherwise, tell the user to search again
     });
@@ -44,43 +43,33 @@ $(document).ready(function() {
             url: darURLEncoded,
             method: "GET"
         }).then(function(response) {
-            stations = response.result[0].stations;
-            // console.log(darURLEncoded);
-            // console.log(stations.length);
+            var results = response.result[0].stations;
 
-            for (var i = 0; i < stations.length; i++) {
+            for (var i = 0; i < results.length; i++) {
                 localStorage.clear();
 
                 // add to list of genres
-                if (!genres.includes(stations[i].genre)) {
-                    genres.push(stations[i].genre);
+                if (!genres.includes(results[i].genre)) {
+                    genres.push(results[i].genre);
                 }
 
                 // station info
                 var station = {
-                    genre: stations[i].genre,
-                    callsign: stations[i].callsign//,
+                    genre: results[i].genre,
+                    callsign: results[i].callsign//,
                     // dial: stations[i].dial,
                     // slogan: stations[i].slogan
                 }
 
-                // stations.push(station);
-
-                // create a new list item for every station
-                // var stationEl = $("<li>");
-                // stationEl.attr("class", "station");
-                // stationEl.attr("style", "color: red;");
-                // stationEl.html(stations[i].callsign + ' - ' + stations[i].slogan);
-                // $("#search-list").append(stationEl);
+                stations.push(station);
             }
 
             console.log(stations);
-            console.log(genres);
 
             localStorage.setItem('genres', JSON.stringify(genres));
-            // localStorage.setItem('stations', JSON.stringify(stations));
-            
-            // console.log(stations);
+            localStorage.setItem('stations', JSON.stringify(stations));
+
+            // window.location.href = './results.html';
         });
     }
 
