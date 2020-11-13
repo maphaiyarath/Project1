@@ -7,6 +7,15 @@ $(document).ready(function() {
     });
 
     $('.dropdown-trigger').dropdown();
+<<<<<<< HEAD
+=======
+//     $('select').formSelect();
+// });
+    // console.log($(".dropdown-trigger"))
+    // $('.dropdown-trigger').dropdown();
+    // find user's location based off of ip address
+
+>>>>>>> 08cf250fb7198edfb62246b25f8c3009bbb6b880
 
     // global variables
     var callsign = '';
@@ -80,9 +89,6 @@ $(document).ready(function() {
         });
     }
 });
-
-
-
 
 
 /*
