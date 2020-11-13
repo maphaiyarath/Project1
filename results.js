@@ -75,7 +75,6 @@ $(document).ready(function() {
     $(".station").on("click", function(event) {
         callsign = $(event.target).data('callsign');
         stationID = $(event.target).data('stationid');
-        // console.log(stationID);
 
         var playerURL = 'http://api.dar.fm/uberstationurl.php?callback=json&callsign=' + callsign + '&partner_token=' + apiKey;
         var playerURLEncoded = encodeURI(playerURL);
@@ -86,7 +85,6 @@ $(document).ready(function() {
         }).then(function(response) {
             var radioURL = response.result[0].websiteurl;
             var streamURL = response.result[0].url;
-            //console.log(response.result[0]);
 
             $("#player").attr("src", streamURL);
             $("#player").attr("style", "display: block;");

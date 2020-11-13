@@ -22,9 +22,9 @@ $(document).ready(function() {
 
         // TODO: make sure the input is valid
         city = $("#city-input").val().trim();
-        // state = ;
+        state = $("#state option:selected").text();
 
-        if (!city) {
+        if (!city || !state) {
             return;
         }
 
@@ -40,9 +40,6 @@ $(document).ready(function() {
         var apiKey = '4363387309';
 
         // for now, we are hard coding city & state
-        city = 'dallas';
-        state = 'tx';
-        
         var darURL = 'https://apidarfm.global.ssl.fastly.net/darstations.php?callback=json&city=' + city + '&state=' + state + '&exact=1&partner_token=' + apiKey;
         var darURLEncoded = encodeURI(darURL);
 
@@ -50,7 +47,6 @@ $(document).ready(function() {
             url: darURLEncoded,
             method: "GET"
         }).then(function(response) {
-            console.log(darURLEncoded);
             var results = response.result[0].stations;
 
             for (var i = 0; i < results.length; i++) {
