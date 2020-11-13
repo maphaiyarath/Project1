@@ -1,10 +1,19 @@
 $(document).ready(function() {
+    // getting past CORS
+    jQuery.ajaxPrefilter(function(options) {
+        if (options.crossDomain && jQuery.support.cors) {
+            options.url = 'https://cors-anywhere.herokuapp.com/' + options.url;
+        }
+    });
+
+    var apiKey = '4363387309';
     var genres = [];
     var stations = [];
     var container = $(".container");
     var storedGenres = JSON.parse(localStorage.getItem("genres"));
     var storedStations = JSON.parse(localStorage.getItem("stations"));
     var dataGenre = $(".data-genre");
+    var callsign = '';
 
     // get info from localStorage
     if (storedStations !== null) {
@@ -55,7 +64,36 @@ $(document).ready(function() {
         // add a link to that station
         var link = $("<a>");
         link.attr("href", "#");
+        link.attr("class", "station")
+        link.attr("data-callsign", stations[i].callsign);
         link.html(stations[i].callsign);
         genreCard.append(link);
     }
+
+    // change callsign
+    $(".station").on("click", function(event) {
+        callsign = $(event.target).data('callsign');
+
+        /*
+        // api.dar.fm/player_api.php?callsign=KBZT&onnow_display=true&station_display=true&volume_display=true&partner_token=1234567890
+        var webPlayerURL = 'http://api.dar.fm/player_api.php?callsign=' + callsign + '&onnow_display=true&station_display=true&volume_display=true&partner_token=' + apiKey;
+        var webPlayerURLEncoded = encodeURI(webPlayerURL);
+
+        $.ajax({
+            url: webPlayerURLEncoded,
+            method: "GET"
+        }).then(function(response) {
+            console.log(webPlayerURLEncoded);
+        });
+        */
+    });
 });
+
+/*
+darInit("bastille", $(".image-viewer"), "1234567890", styles = {
+    width: '250',
+    clear: 'left',
+    border: '1px solid #CCCCCC',
+    ‘background-color': 'transparent'
+});
+*/

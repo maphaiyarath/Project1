@@ -33,10 +33,11 @@ $(document).ready(function() {
         var apiKey = '4363387309';
 
         // for now, we are hard coding city & state
-        city = 'san diego';
-        state = 'ca';
+        city = 'dallas';
+        state = 'tx';
         
-        var darURL = 'http://api.dar.fm/darstations.php?callback=json&city=' + city + '&state=' + state + '&exact=1&partner_token=' + apiKey;
+        // var darURL = 'http://api.dar.fm/darstations.php?callback=json&city=' + city + '&state=' + state + '&exact=1&partner_token=' + apiKey;
+        var darURL = 'https://apidarfm.global.ssl.fastly.net/darstations.php?callback=json&city=' + city + '&state=' + state + '&exact=1&partner_token=' + apiKey;
         var darURLEncoded = encodeURI(darURL);
 
         $.ajax({
@@ -46,7 +47,8 @@ $(document).ready(function() {
             var results = response.result[0].stations;
 
             for (var i = 0; i < results.length; i++) {
-                localStorage.clear();
+                localStorage.removeItem("genres");
+                localStorage.removeItem("stations");
 
                 // add to list of genres
                 if (!genres.includes(results[i].genre)) {
@@ -63,29 +65,12 @@ $(document).ready(function() {
 
                 stations.push(station);
             }
-
             localStorage.setItem('genres', JSON.stringify(genres));
             localStorage.setItem('stations', JSON.stringify(stations));
 
             window.location.href = './results.html';
         });
     }
-
-    // get list of previously searched stations from local storage, if any
-    function init() {
-        var storedStations = JSON.parse(localStorage.getItem("stations"));
-        var storedGenres = JSON.parse(localStorage.getItem("genres"));
-
-        if (storedStations !== null) {
-            stations = storedStations;
-        }
-
-        if (storedGenres !== null) {
-            genres = storedGenres;
-        }
-    }
-
-    init();
 });
 
 
