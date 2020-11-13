@@ -5,7 +5,11 @@ $(document).ready(function() {
             options.url = 'https://cors-anywhere.herokuapp.com/' + options.url;
         }
     });
-
+    $('.dropdown-trigger').dropdown();
+//     $('select').formSelect();
+// });
+    // console.log($(".dropdown-trigger"))
+    // $('.dropdown-trigger').dropdown();
     // find user's location based off of ip address
     var city = '';
     var state = '';
@@ -47,14 +51,6 @@ $(document).ready(function() {
         */
     }
 });
-
-
-
-
-
-
-
-
 
 
 /*
