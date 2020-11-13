@@ -6,16 +6,8 @@ $(document).ready(function() {
         }
     });
 
-    $('.dropdown-trigger').dropdown();
-<<<<<<< HEAD
-=======
-//     $('select').formSelect();
-// });
-    // console.log($(".dropdown-trigger"))
     // $('.dropdown-trigger').dropdown();
-    // find user's location based off of ip address
 
->>>>>>> 08cf250fb7198edfb62246b25f8c3009bbb6b880
 
     // global variables
     var callsign = '';
@@ -51,7 +43,6 @@ $(document).ready(function() {
         city = 'dallas';
         state = 'tx';
         
-        // var darURL = 'http://api.dar.fm/darstations.php?callback=json&city=' + city + '&state=' + state + '&exact=1&partner_token=' + apiKey;
         var darURL = 'https://apidarfm.global.ssl.fastly.net/darstations.php?callback=json&city=' + city + '&state=' + state + '&exact=1&partner_token=' + apiKey;
         var darURLEncoded = encodeURI(darURL);
 
@@ -77,7 +68,9 @@ $(document).ready(function() {
                     callsign: results[i].callsign,
                     dial: results[i].dial,
                     slogan: results[i].slogan,
-                    websiteurl: results[i].websiteurl
+                    websiteurl: results[i].websiteurl,
+                    station_id: results[i].station_id,
+                    station_image: results[i].station_image
                 }
 
                 stations.push(station);
@@ -89,19 +82,3 @@ $(document).ready(function() {
         });
     }
 });
-
-
-/*
-// get user's location based off of ip address
-var queryURL = "http://ip-api.com/json/";
-
-$.ajax({
-    url: queryURL,
-    method: "GET"
-}).then(function(response) {
-    city = response.city;
-    state = response.region;
-
-    getStations();
-});
-*/
