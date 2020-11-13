@@ -63,8 +63,8 @@ $(document).ready(function() {
 
         // add a link to that station
         var link = $("<a>");
-        link.attr("href", stations[i].websiteurl);
-        link.attr("target", "_blank");
+        link.attr("href", "#");// stations[i].websiteurl);
+        // link.attr("target", "_blank");
         link.attr("class", "station")
         link.attr("data-callsign", stations[i].callsign);
         link.html(stations[i].callsign);
@@ -84,7 +84,21 @@ $(document).ready(function() {
             method: "GET"
         }).then(function(response) {
             var radioURL = response.result[0].websiteurl;
-            // console.log(radioURL);
+            var streamURL = response.result[0].url;
+            console.log(response.result[0]);
+
+            $("#player").attr("style", "display: block;");
+            $("#player").attr("src", streamURL);
+
+            // var audioPlayer = $("<audio>");
+            // audioPlayer.attr("src", streamURL);
+            // audioPlayer.attr("autoplay", "true");
+            // audioPlayer.attr("controls", "true");
+            // audioPlayer.attr("volume", "1.0");
+
+            // container.prepend(audioPlayer);
+
+            // <audio src="http://www.partyviberadio.com:8000/;listen.pls?sid=1" autoplay="true" controls="true" volume="1.0"></audio>
         });
 
 

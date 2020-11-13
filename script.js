@@ -6,6 +6,8 @@ $(document).ready(function() {
         }
     });
 
+    $('.dropdown-trigger').dropdown();
+
     // global variables
     var callsign = '';
     var city = '';
@@ -18,8 +20,12 @@ $(document).ready(function() {
         event.preventDefault();
 
         // TODO: make sure the input is valid
-        city = $("#city-input").val();
+        city = $("#city-input").val().trim();
         // state = ;
+
+        if (!city) {
+            return;
+        }
 
         // if the input is valid, go to the results page and display the list of radio stations
         getStations();
