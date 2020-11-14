@@ -119,12 +119,15 @@ $(document).ready(function() {
             //  show the song title, artist, and current station
             var song = $("<p>");
             song.attr("style", "color: white;");
-            if (response.result[0].artist === undefined) {
+            if (response.result[0].artist !== undefined) {
                 artist = response.result[0].artist;
             }
-            if (response.result[0].title === undefined) {
+            if (response.result[0].title !== undefined) {
                 title = response.result[0].title;
             }
+
+            console.log(response.result[0].artist);
+
             song.html(title + ' - ' + artist + ' // Now playing on ' + callsign);
             $("#song-info").append(song);
 
@@ -146,7 +149,7 @@ $(document).ready(function() {
             var img = $("<img>");
 
             // if album art listed, then use that - otherwise, use placeholder
-            if (response.track.album.image[0]['#text'] === undefined) {
+            if (response.track.album.image[0]['#text'] !== undefined) {
                 img.attr("src", response.track.album.image[0]['#text']);
             } else {
                 img.attr("src", 'https://via.placeholder.com/100');
