@@ -75,7 +75,7 @@ $(document).ready(function() {
 
         // each station has a unique callsign and station_id
         var link = $("<a>");
-        // link.attr("href", "#");
+        link.attr("href", "#song-info");
         link.attr("class", "station")
         link.attr("data-callsign", stations[i].callsign);
         link.attr("data-stationid", stations[i].station_id);

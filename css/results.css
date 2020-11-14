@@ -3,6 +3,7 @@ nav {
     position: fixed;
     background-color: rgba(85, 87, 88, 1);
     z-index: 2;
+    padding: 0px 25px 0px 25px;
 }
 
 /* Card CSS */
