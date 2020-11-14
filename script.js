@@ -37,12 +37,12 @@ $(document).ready(function() {
         var apiKey = '4363387309';
 
         // search stations based on city / state
-        var darURL = 'https://apidarfm.global.ssl.fastly.net/darstations.php?callback=json&city=' + city + '&state=' + state + '&exact=1&partner_token=' + apiKey;
+        var darURL = 'http://api.dar.fm/darstations.php?callback=json&city=' + city + '&state=' + state + '&exact=1&partner_token=' + apiKey;
         var darURLEncoded = encodeURI(darURL);
 
         $.ajax({
             url: darURLEncoded,
-            method: "GET"
+            method: "GET",
         }).then(function(response) {
             var results = response.result[0].stations;
 
