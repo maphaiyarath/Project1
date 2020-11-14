@@ -29,7 +29,7 @@ $(document).ready(function() {
     if (storedStations !== null) {
         stations = storedStations;
     }
-
+    
     // generate a card for each genre
     for (var i = 0; i < genres.length; i++) {
         var row = $("<div>");
@@ -59,6 +59,9 @@ $(document).ready(function() {
         stationLinksDiv.addClass("card-action");
         stationLinksDiv.attr("data-genre", genres[i]);
         card.append(stationLinksDiv);
+
+        // Adds card content to result page
+        $(".card-info").append(row);
     }
 
     // fill in the stations found for a genre
