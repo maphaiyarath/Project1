@@ -1,7 +1,7 @@
 # Radio Finder
 
 ![Radio Finder App](./radiofinder.png)
-You can see the deployed app [here](https://gsmac14.github.io/Project1/).
+You can see the deployed app [here](https://maphaiyarath.github.io/Project1).
 
 ## Table of Contents
 * [Description](#description)
@@ -11,6 +11,8 @@ You can see the deployed app [here](https://gsmac14.github.io/Project1/).
 
 ## Description
 This project entailed creating a web application with usage of of two APIs, HTML, CSS, and JavaScript/JQuery. The app had to be user friendly and with localStorage. Our group created a web application that helps users find a local radio station when he/she are in a differenct city. It also allows the user to listen to any radio station across the U.S.
+
+The original project can be found [here](https://github.com/gsmac14/Project1).
 
 ## Credits
 * [DAR.fm API](https://docs.google.com/document/d/1QM7ScdxNvg-ttwRi0EWn7KmaR02EP2gqwu5LNlsnO4k/pub)
@@ -26,4 +28,4 @@ This project entailed creating a web application with usage of of two APIs, HTML
 This project is licensed under the MIT license.
 
 ## Badges
-[![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/gsmac14/Project1)
+[![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/maphaiyarath/radio-finder)
