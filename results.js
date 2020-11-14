@@ -126,7 +126,7 @@ $(document).ready(function() {
                 title = response.result[0].title;
             }
 
-            console.log(response.result[0].artist);
+            // console.log(response.result[0].artist);
 
             song.html(title + ' - ' + artist + ' // Now playing on ' + callsign);
             $("#song-info").append(song);
