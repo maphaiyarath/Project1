@@ -1,3 +1,5 @@
+// dallas - other music (kxt), alternative (renegade radio)
+
 $(document).ready(function() {
     // getting past CORS
     jQuery.ajaxPrefilter(function(options) {
@@ -111,12 +113,46 @@ $(document).ready(function() {
             method: "GET"
         }).then(function(response) {
             $("#song-info").empty();
+            var artist = 'unknown';
+            var title = 'unknown';
 
             //  show the song title, artist, and current station
             var song = $("<p>");
             song.attr("style", "color: white;");
+            if (response.result[0].artist) {
+                artist = response.result[0].artist;
+            }
+            if (response.result[0].title) {
+                title = response.result[0].title;
+            }
             song.html(response.result[0].title + ' - ' + response.result[0].artist + ' // Now playing on ' + callsign);
             $("#song-info").append(song);
+
+            getAlbumArt(response.result[0].artist, response.result[0].title);
+        });
+    }
+
+    // last fm api key
+    var lastFMKey = 'bd9e30016f70dbefbda1a9172d668e5e';
+
+    // get album art using last fm
+    function getAlbumArt(artist, track) {
+        var albumURL = 'http://ws.audioscrobbler.com/2.0/?method=track.getInfo&api_key=' + lastFMKey + '&artist=' + artist + '&track=' + track + '&format=json';
+        
+        $.ajax({
+            url: encodeURI(albumURL),
+            method: "GET"
+        }).then(function(response) {
+            var img = $("<img>");
+
+            // if album art listed, then use that - otherwise, use placeholder
+            if (response.track.album.image[0]['#text']) {
+                img.attr("src", response.track.album.image[1]['#text']);
+            } else {
+                img.attr("src", 'https://via.placeholder.com/150');
+            }
+
+            $("#song-info").append(img);
         });
     }
 });
