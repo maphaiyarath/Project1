@@ -1,5 +1,3 @@
-// dallas - other music (kxt), alternative (renegade radio)
-
 $(document).ready(function() {
     // getting past CORS
     jQuery.ajaxPrefilter(function(options) {
@@ -37,7 +35,7 @@ $(document).ready(function() {
     for (var i = 0; i < genres.length; i++) {
         var row = $("<div>");
         row.addClass("row");
-        container.append(row);
+        $(".card-info").append(row);
 
         var col = $("<div>");
         col.addClass("col-4");
@@ -62,9 +60,6 @@ $(document).ready(function() {
         stationLinksDiv.addClass("card-action");
         stationLinksDiv.attr("data-genre", genres[i]);
         card.append(stationLinksDiv);
-
-        // Adds card content to result page
-        $(".card-info").append(row);
     }
 
     // fill in the stations found for a genre
@@ -126,15 +121,14 @@ $(document).ready(function() {
                 title = response.result[0].title;
             }
 
-            // console.log(response.result[0].artist);
-
             song.html(title + ' - ' + artist + ' // Now playing on ' + callsign);
             $("#song-info").append(song);
 
-            getAlbumArt(response.result[0].artist, response.result[0].title);
+            getAlbumArt(artist, title);
         });
 
-        //var interval = setTimeout(getCurrentSong, 500);
+        // check to see if song info needs to be updated
+        // var interval = setTimeout(getCurrentSong, 500);
     }
 
 
@@ -149,7 +143,6 @@ $(document).ready(function() {
         }).then(function(response) {
             var img = $("<img>");
 
-            // console.log(response);
             // if album art listed, then use that - otherwise, use placeholder
             if (response.track.album.image[0]['#text'] !== undefined || response.track.album.image[0]['#text'] !== '') {
                 img.attr("src", response.track.album.image[0]['#text']);

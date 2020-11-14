@@ -6,6 +6,12 @@ nav {
     padding: 0px 25px 0px 25px;
 }
 
+#audio-player {
+    position: fixed;
+    bottom: 0px;
+    z-index: 2;
+}
+
 /* Card CSS */
 .card-content {
     font-size: 15px;

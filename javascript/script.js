@@ -21,14 +21,13 @@ $(document).ready(function() {
         city = $("#city-input").val().trim();
         state = $("#state option:selected").text();
 
+        // TODO: otherwise, tell the user to search again
         if (!city || !state) {
             return;
         }
 
         // if the input is valid, go to the results page and display the list of radio stations
         getStations();
-        
-        // TODO: otherwise, tell the user to search again
     });
     
     // return a list of radio stations using dar fm api
