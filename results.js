@@ -119,13 +119,13 @@ $(document).ready(function() {
             //  show the song title, artist, and current station
             var song = $("<p>");
             song.attr("style", "color: white;");
-            if (response.result[0].artist) {
+            if (response.result[0].artist === undefined) {
                 artist = response.result[0].artist;
             }
-            if (response.result[0].title) {
+            if (response.result[0].title === undefined) {
                 title = response.result[0].title;
             }
-            song.html(response.result[0].title + ' - ' + response.result[0].artist + ' // Now playing on ' + callsign);
+            song.html(title + ' - ' + artist + ' // Now playing on ' + callsign);
             $("#song-info").append(song);
 
             getAlbumArt(response.result[0].artist, response.result[0].title);
@@ -146,10 +146,10 @@ $(document).ready(function() {
             var img = $("<img>");
 
             // if album art listed, then use that - otherwise, use placeholder
-            if (response.track.album.image[0]['#text']) {
-                img.attr("src", response.track.album.image[1]['#text']);
+            if (response.track.album.image[0]['#text'] === undefined) {
+                img.attr("src", response.track.album.image[0]['#text']);
             } else {
-                img.attr("src", 'https://via.placeholder.com/150');
+                img.attr("src", 'https://via.placeholder.com/100');
             }
 
             $("#song-info").append(img);
