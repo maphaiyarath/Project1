@@ -1,7 +1,7 @@
 # Radio Finder
 
 ![Radio Finder App](./radiofinder.png)
-You can see the deployed app [here](https://maphaiyarath.github.io/Project1).
+You can see the deployed app [here](https://maphaiyarath.github.io/radio-finder).
 
 ## Table of Contents
 * [Description](#description)

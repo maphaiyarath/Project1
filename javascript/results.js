@@ -121,8 +121,14 @@ $(document).ready(function() {
                 title = response.result[0].title;
             }
 
-            song.html(title + ' - ' + artist + ' // Now playing on ' + callsign);
+            song.html(title + ' - ' + artist);
+
+            var nowPlaying = $("<p>");
+            nowPlaying.attr("style", "color: white;");
+            nowPlaying.html('Now playing on ' + callsign);
+
             $("#song-info").append(song);
+            $("#song-info").append(nowPlaying);
 
             getAlbumArt(artist, title);
         });
