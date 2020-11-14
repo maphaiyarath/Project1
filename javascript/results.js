@@ -11,6 +11,9 @@ $(document).ready(function() {
     // global vars
     var apiKey = '4363387309';
 
+    // last fm api key
+    var lastFMKey = 'bd9e30016f70dbefbda1a9172d668e5e';
+
     var callsign = '';
     var stationID = '';
     var genres = [];
@@ -72,7 +75,7 @@ $(document).ready(function() {
 
         // each station has a unique callsign and station_id
         var link = $("<a>");
-        link.attr("href", "#");
+        // link.attr("href", "#");
         link.attr("class", "station")
         link.attr("data-callsign", stations[i].callsign);
         link.attr("data-stationid", stations[i].station_id);
@@ -105,12 +108,6 @@ $(document).ready(function() {
     function getCurrentSong() {
         var songURL = 'http://api.dar.fm/playlist.php?callback=json&station_id=' + stationID + '&partner_token=' + apiKey;
 
-        // if (refresh) {
-        //     clearTimeout(refresh);
-        //     refresh = null;
-        // }
-        // refresh = setTimeout(function(){ getCurrentSong(); }, 100);
-
         $.ajax({
             url: songURL,
             method: "GET"
@@ -136,10 +133,11 @@ $(document).ready(function() {
 
             getAlbumArt(response.result[0].artist, response.result[0].title);
         });
+
+        //var interval = setTimeout(getCurrentSong, 500);
     }
 
-    // last fm api key
-    var lastFMKey = 'bd9e30016f70dbefbda1a9172d668e5e';
+
 
     // get album art using last fm
     function getAlbumArt(artist, track) {
@@ -151,8 +149,9 @@ $(document).ready(function() {
         }).then(function(response) {
             var img = $("<img>");
 
+            // console.log(response);
             // if album art listed, then use that - otherwise, use placeholder
-            if (response.track.album.image[0]['#text'] !== undefined) {
+            if (response.track.album.image[0]['#text'] !== undefined || response.track.album.image[0]['#text'] !== '') {
                 img.attr("src", response.track.album.image[0]['#text']);
             } else {
                 img.attr("src", 'https://via.placeholder.com/100');
