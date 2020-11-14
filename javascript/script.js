@@ -46,11 +46,11 @@ $(document).ready(function() {
         }).then(function(response) {
             var results = response.result[0].stations;
 
-            for (var i = 0; i < results.length; i++) {
-                // clear out localStorage so we can update it w new search
-                localStorage.removeItem("genres");
-                localStorage.removeItem("stations");
+            // clear out localStorage so we can update it w new search
+            localStorage.removeItem("genres");
+            localStorage.removeItem("stations");
 
+            for (var i = 0; i < results.length; i++) {
                 // add to list of genres
                 if (!genres.includes(results[i].genre)) {
                     genres.push(results[i].genre);
@@ -75,7 +75,7 @@ $(document).ready(function() {
             localStorage.setItem('stations', JSON.stringify(stations));
 
             // go to results page
-            window.location.href = './results.html';
+            window.location.href = './html/results.html';
         });
     }
 });
