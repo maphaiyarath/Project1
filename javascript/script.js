@@ -75,7 +75,7 @@ $(document).ready(function() {
             localStorage.setItem('stations', JSON.stringify(stations));
 
             // go to results page
-            window.location.href = './results.html';
+            window.location.href = './html/results.html';
         });
     }
 });
