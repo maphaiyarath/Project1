@@ -91,6 +91,7 @@ $(document).ready(function() {
             method: "GET"
         }).then(function(response) {
             var streamURL = response.result[0].url;
+            console.log(response)
 
             $("#player").attr("src", streamURL);
             $("#player").attr("style", "display: block;");
