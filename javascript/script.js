@@ -57,13 +57,11 @@ $(document).ready(function() {
 
                 // station info
                 var station = {
+                    band: results[i].band,
                     genre: results[i].genre,
                     callsign: results[i].callsign,
                     dial: results[i].dial,
-                    slogan: results[i].slogan,
-                    websiteurl: results[i].websiteurl,
                     station_id: results[i].station_id,
-                    station_image: results[i].station_image
                 }
 
                 stations.push(station);

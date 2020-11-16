@@ -18,9 +18,12 @@ $(document).ready(function() {
     var streamURL = '';
     var genres = [];
     var stations = [];
-    var container = $(".container");
-    var dataGenre = $(".data-genre");
+    var audioPlayer = $("#player");
+    var cardInfo = $(".card-info");
     var cover = $("#cover");
+    var currentStation = $("#station-info");
+    var songTitle = $("#title");
+    var station = $(".station");
     
     var storedGenres = JSON.parse(localStorage.getItem("genres"));
     var storedStations = JSON.parse(localStorage.getItem("stations"));
@@ -38,7 +41,7 @@ $(document).ready(function() {
     for (var i = 0; i < genres.length; i++) {
         var row = $("<div>");
         row.addClass("row");
-        $(".card-info").append(row);
+        cardInfo.append(row);
 
         var col = $("<div>");
         col.addClass("col-4");
@@ -82,7 +85,7 @@ $(document).ready(function() {
     }
 
     // when you click on a station, it changes the src for the audio player using the callsign
-    $(".station").on("click", function(event) {
+    station.on("click", function(event) {
         callsign = $(event.target).data('callsign');
         stationID = $(event.target).data('stationid');
 
@@ -93,12 +96,14 @@ $(document).ready(function() {
             url: playerURLEncoded,
             method: "GET"
         }).then(function(response) {
+            console.log(response);
             streamURL = response.result[0].url;
 
-            $("#player").attr("src", streamURL);
-            $("#player").attr("style", "display: block;");
+            audioPlayer.attr("src", streamURL);
 
-            setTimeout(getCurrentSong, 500);
+            getCurrentSong();
+            console.log('hey');
+            // setTimeout(getCurrentSong, 1000);
         });
     });
 
@@ -120,18 +125,17 @@ $(document).ready(function() {
             if (response.result[0].title) {
                 title = response.result[0].title;
             }
-
-            $("#title").html(title + ' - ' + artist);
-
-            $("#station-info").html('Now playing on ' + callsign);
+            
+            // display info on page
+            songTitle.html(title + ' - ' + artist);
+            currentStation.html('Now playing on ' + callsign);
 
             getAlbumArt(artist, title);
 
-            setTimeout(getCurrentSong, 500);
+            // update if new song
+            // setTimeout(getCurrentSong, 1000);
         });
     }
-
-
 
     // get album art using last fm
     function getAlbumArt(artist, track) {
