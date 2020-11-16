@@ -23,7 +23,6 @@ $(document).ready(function() {
     var cover = $("#cover");
     var currentStation = $("#station-info");
     var songTitle = $("#title");
-    var station = $(".station");
     
     var storedGenres = JSON.parse(localStorage.getItem("genres"));
     var storedStations = JSON.parse(localStorage.getItem("stations"));
@@ -85,7 +84,7 @@ $(document).ready(function() {
     }
 
     // when you click on a station, it changes the src for the audio player using the callsign
-    station.on("click", function(event) {
+    $(".station").on("click", function(event) {
         callsign = $(event.target).data('callsign');
         stationID = $(event.target).data('stationid');
 
@@ -96,14 +95,11 @@ $(document).ready(function() {
             url: playerURLEncoded,
             method: "GET"
         }).then(function(response) {
-            console.log(response);
             streamURL = response.result[0].url;
 
             audioPlayer.attr("src", streamURL);
 
             getCurrentSong();
-            console.log('hey');
-            // setTimeout(getCurrentSong, 1000);
         });
     });
 
@@ -133,7 +129,7 @@ $(document).ready(function() {
             getAlbumArt(artist, title);
 
             // update if new song
-            // setTimeout(getCurrentSong, 1000);
+            setTimeout(getCurrentSong, (response.result[0].seconds_remaining) * 1000);
         });
     }
 
@@ -146,8 +142,12 @@ $(document).ready(function() {
             method: "GET"
         }).then(function(response) {
             // if album art listed, then use that - otherwise, use placeholder
-            if (response.track.album.image[0]['#text']) {
-                cover.attr("src", response.track.album.image[0]['#text']);
+            if (response.track.album) {
+                if (response.track.album.image) {
+                    cover.attr("src", response.track.album.image[0]['#text']);
+                } else {
+                    cover.attr("src", 'https://via.placeholder.com/34');
+                }
             } else {
                 cover.attr("src", 'https://via.placeholder.com/34');
             }
