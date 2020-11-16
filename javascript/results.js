@@ -2,6 +2,7 @@ $(document).ready(function() {
     // getting past CORS
     jQuery.ajaxPrefilter(function(options) {
         if (options.crossDomain && jQuery.support.cors) {
+            var http = (window.location.protocol === 'http:' ? 'http:' : 'https:');
             options.url = 'https://cors-anywhere.herokuapp.com/' + options.url;
         }
     });
@@ -14,10 +15,12 @@ $(document).ready(function() {
 
     var callsign = '';
     var stationID = '';
+    var streamURL = '';
     var genres = [];
     var stations = [];
     var container = $(".container");
     var dataGenre = $(".data-genre");
+    var cover = $("#cover");
     
     var storedGenres = JSON.parse(localStorage.getItem("genres"));
     var storedStations = JSON.parse(localStorage.getItem("stations"));
@@ -85,18 +88,17 @@ $(document).ready(function() {
 
         var playerURL = 'http://api.dar.fm/uberstationurl.php?callback=json&callsign=' + callsign + '&partner_token=' + apiKey;
         var playerURLEncoded = encodeURI(playerURL);
-
+        
         $.ajax({
             url: playerURLEncoded,
             method: "GET"
         }).then(function(response) {
-            var streamURL = response.result[0].url;
-            console.log(response)
+            streamURL = response.result[0].url;
 
             $("#player").attr("src", streamURL);
             $("#player").attr("style", "display: block;");
 
-            getCurrentSong();
+            setTimeout(getCurrentSong, 500);
         });
     });
 
@@ -108,34 +110,25 @@ $(document).ready(function() {
             url: songURL,
             method: "GET"
         }).then(function(response) {
-            $("#song-info").empty();
             var artist = 'unknown';
             var title = 'unknown';
 
             //  show the song title, artist, and current station
-            var song = $("<p>");
-            song.attr("style", "color: white;");
-            if (response.result[0].artist !== undefined) {
+            if (response.result[0].artist) {
                 artist = response.result[0].artist;
             }
-            if (response.result[0].title !== undefined) {
+            if (response.result[0].title) {
                 title = response.result[0].title;
             }
 
-            song.html(title + ' - ' + artist);
+            $("#title").html(title + ' - ' + artist);
 
-            var nowPlaying = $("<p>");
-            nowPlaying.attr("style", "color: white;");
-            nowPlaying.html('Now playing on ' + callsign);
-
-            $("#song-info").append(song);
-            $("#song-info").append(nowPlaying);
+            $("#station-info").html('Now playing on ' + callsign);
 
             getAlbumArt(artist, title);
-        });
 
-        // check to see if song info needs to be updated
-        // var interval = setTimeout(getCurrentSong, 500);
+            setTimeout(getCurrentSong, 500);
+        });
     }
 
 
@@ -148,16 +141,12 @@ $(document).ready(function() {
             url: encodeURI(albumURL),
             method: "GET"
         }).then(function(response) {
-            var img = $("<img>");
-
             // if album art listed, then use that - otherwise, use placeholder
-            if (response.track.album.image[0]['#text'] !== undefined || response.track.album.image[0]['#text'] !== '') {
-                img.attr("src", response.track.album.image[0]['#text']);
+            if (response.track.album.image[0]['#text']) {
+                cover.attr("src", response.track.album.image[0]['#text']);
             } else {
-                img.attr("src", 'https://via.placeholder.com/100');
+                cover.attr("src", 'https://via.placeholder.com/34');
             }
-
-            $("#song-info").append(img);
         });
     }
 });
