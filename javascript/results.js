@@ -97,7 +97,7 @@ $(document).ready(function() {
         }).then(function(response) {
             streamURL = response.result[0].url;
 
-            audioPlayer.attr("src", streamURL);
+            audioPlayer.attr("src", 'https://cors-anywhere.herokuapp.com/'+streamURL);
 
             getCurrentSong();
         });
