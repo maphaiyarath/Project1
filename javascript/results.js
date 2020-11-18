@@ -97,11 +97,25 @@ $(document).ready(function() {
         }).then(function(response) {
             streamURL = response.result[0].url;
 
-            audioPlayer.attr("src", 'https://cors-anywhere.herokuapp.com/'+streamURL);
+            getT();
+
+            audioPlayer.attr("src", streamURL);
 
             getCurrentSong();
         });
     });
+
+    function getT() {
+        $.getJSON('http://www.whateverorigin.org/get?url=' + encodeURIComponent(streamURL) + '&callback=?', function(data){
+	        alert(data.contents);
+        });
+    };
+
+    /*
+    $.getJSON('http://www.whateverorigin.org/get?url=' + encodeURIComponent('http://google.com') + '&callback=?', function(data){
+	alert(data.contents);
+});
+    */
 
     // get current song info
     function getCurrentSong() {
