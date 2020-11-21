@@ -97,25 +97,13 @@ $(document).ready(function() {
         }).then(function(response) {
             streamURL = response.result[0].url;
 
-            getT();
-
             audioPlayer.attr("src", streamURL);
 
             getCurrentSong();
         });
     });
 
-    function getT() {
-        $.getJSON('http://www.whateverorigin.org/get?url=' + encodeURIComponent(streamURL) + '&callback=?', function(data){
-	        alert(data.contents);
-        });
-    };
-
-    /*
-    $.getJSON('http://www.whateverorigin.org/get?url=' + encodeURIComponent('http://google.com') + '&callback=?', function(data){
-	alert(data.contents);
-});
-    */
+    // http://api.dar.fm/player_api.php?callsign=KLUV&onnow_display=true&station_display=true&volume_display=true
 
     // get current song info
     function getCurrentSong() {
