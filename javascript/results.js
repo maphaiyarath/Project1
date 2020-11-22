@@ -96,7 +96,7 @@ $(document).ready(function() {
             method: "GET"
         }).then(function(response) {
             streamURL = response.result[0].url;
-
+            
             audioPlayer.attr("src", streamURL);
 
             getCurrentSong();
