@@ -97,11 +97,15 @@ $(document).ready(function() {
         }).then(function(response) {
             streamURL = response.result[0].url;
 
-            audioPlayer.attr("src", streamURL);
+            goToStation();
 
             getCurrentSong();
         });
     });
+
+    function goToStation(streamURL) {
+        audioPlayer.attr("src", streamURL);
+    }
 
     // http://api.dar.fm/player_api.php?callsign=KLUV&onnow_display=true&station_display=true&volume_display=true
 
