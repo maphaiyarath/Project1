@@ -1,11 +1,12 @@
 # Radio Finder
 
-![Radio Finder App](./radiofinder.png)
+![Radio Finder App](./og-radio-finder.png)
 You can see the deployed app [here](https://maphaiyarath.github.io/radio-finder).
 
 ## Table of Contents
 * [Description](#description)
 * [Credits](#credits)
+* [Collaborators](#collaborators)
 * [License](#license)
 * [Badges](#badges)
 
