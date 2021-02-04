@@ -1,6 +1,7 @@
 # Radio Finder
 
 ![Radio Finder App](./og-radio-finder.png)
+
 You can see the deployed app [here](https://maphaiyarath.github.io/radio-finder).
 
 ## Table of Contents
@@ -11,7 +12,7 @@ You can see the deployed app [here](https://maphaiyarath.github.io/radio-finder)
 * [Badges](#badges)
 
 ## Description
-This project entailed creating a web application with usage of of two APIs, HTML, CSS, and JavaScript/JQuery. The app had to be user friendly and with localStorage. Our group created a web application that helps users find a local radio station when he/she are in a differenct city. It also allows the user to listen to any radio station across the U.S.
+This project entailed creating a web application with usage of of two APIs, HTML, CSS, and JavaScript/JQuery. The app had to be user friendly and with localStorage. Our group created a web application that helps users find a local radio station when he/she are in a different city. It also allows the user to listen to any radio station across the U.S.
 
 You may need to go to your site settings and allow insecure content for the radio streaming URLs to go through.
 
